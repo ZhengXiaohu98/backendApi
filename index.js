@@ -15,19 +15,19 @@ dotenv.config();
 const app = express();
 
 // CORS配置
-const allowedOrigins = ['http://127.0.0.1', 'http://127.0.0.0', 'http://localhost', 'null'];
+const allowedOrigins = ['http://192.168.56.1','http://127.0.0.1', 'http://127.0.0.1:7890','http://127.0.0.0', 'http://localhost'];
 app.use(
   cors({
     methods: "*",
-    // origin: (origin, callback) => {
-    //   if (allowedOrigins.includes(origin)) {
-    //     callback(null, true);
-    //   } else {
-    //     console.log(origin)
-    //     callback(new Error('Not allowed by CORS'));
-    //   }
-    // },
-    origin: true,
+    origin: (origin, callback) => {
+       if (allowedOrigins.includes(origin)) {
+         callback(null, true);
+       } else {
+         console.log(origin)
+         callback(new Error('Not allowed by CORS'));
+       }
+     },
+    // origin: true,
     credentials: true,
   })
 );
@@ -54,7 +54,7 @@ app.get("/", function (req, res) {
 // 路由初始化
 app.use('/user', UserRoute)
 
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+const PORT_NUM = process.env.PORT || 8123;
+app.listen(PORT_NUM, () => {
+  console.log('Server running on port ' + PORT_NUM);
 });
