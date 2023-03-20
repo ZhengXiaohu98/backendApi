@@ -19,15 +19,15 @@ const allowedOrigins = ['http://192.168.56.1','http://127.0.0.1', 'http://127.0.
 app.use(
   cors({
     methods: "*",
-    origin: (origin, callback) => {
-       if (allowedOrigins.includes(origin)) {
-         callback(null, true);
-       } else {
-         console.log(origin)
-         callback(new Error('Not allowed by CORS'));
-       }
-     },
-    // origin: true,
+    //origin: (origin, callback) => {
+    //   if (allowedOrigins.includes(origin)) {
+    //     callback(null, true);
+    //   } else {
+    //     console.log(origin)
+    //     callback(new Error('Not allowed by CORS'));
+     //  }
+    // },
+    origin: true,
     credentials: true,
   })
 );
