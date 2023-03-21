@@ -18,7 +18,6 @@ jobs:
         host: 119.3.39.211
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
         script: |
           cd /root/backendApi
           git pull
