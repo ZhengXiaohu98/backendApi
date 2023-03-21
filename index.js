@@ -50,7 +50,7 @@ db.connect((err) => {
 
 // 测试
 app.get("/", function (req, res) {
-  res.send({ status: "test1" })
+  res.send({ status: "test2" })
 });
 
 // 路由初始化
