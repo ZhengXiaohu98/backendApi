@@ -6,6 +6,8 @@ const dotenv = require('dotenv');
 const db = require('./database/database');
 // 导入路由
 const UserRoute = require('./Router/UserRouter.js');
+const CityClassRoute = require('./Router/CityClassRouter.js');
+
 
 
 // 环境配置
@@ -53,6 +55,7 @@ app.get("/", function (req, res) {
 
 // 路由初始化
 app.use('/user', UserRoute)
+app.use('/cityclass', CityClassRoute)
 
 const PORT_NUM = process.env.PORT || 8123;
 app.listen(PORT_NUM, () => {
