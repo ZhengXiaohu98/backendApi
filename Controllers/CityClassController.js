@@ -2,6 +2,9 @@ const db = require('../database/database');
 const axios = require('axios');
 const md5 = require('md5');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 // 获取一个新的时间对象
 const generateDate = () => {
   const currentDate = new Date();
@@ -16,15 +19,15 @@ const generateDate = () => {
 
 // 城市课堂发送邮件
 const sendEmail = (email) => {
-  const apiKey = 'adbba4fb4ecf6f88d91f84e662bde57d-us12';
-  const listId = '446dcb726c';
+  const apiKey = process.env.MAILCHIMP_APIKEY;
+  const listId = process.env.MAILCHIMP_LISTID;
   const memberId = md5(email.toLowerCase());
   const dataCenter = apiKey.split('-')[1];
   const choose = "CityClass_accept";
 
   const url = `https://${dataCenter}.api.mailchimp.com/3.0/lists/${listId}/members/${memberId}`;
   const url_event = `https://us12.api.mailchimp.com/3.0/lists/${listId}/members/${memberId}/events`;
-  const wx_url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c67b1864-8ad7-4b7a-97e7-1dc59a508dc3';
+  const wx_url = process.env.WX_URL;
 
   const data = {
     email_address: email,
@@ -105,7 +108,7 @@ const deregister = (req, res) => {
 const contactUs = (req, res) => {
   const { email, name, content, classId } = req.body;
   const time = generateDate();
-  const url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c67b1864-8ad7-4b7a-97e7-1dc59a508dc3';
+  const url = process.env.WX_URL;
 
   const postData = JSON.stringify({
     msgtype: 'markdown',
