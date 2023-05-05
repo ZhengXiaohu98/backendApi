@@ -19,7 +19,9 @@ jobs:
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /root/backendApi
+          cd
+          cd ./backendApi
           git pull
           npm install
+          pm2 stop overseaAPI
           pm2 restart overseaAPI
